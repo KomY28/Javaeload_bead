@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: html_head}"></head>
+
+<body>
+
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Árfolyam lekérdezés</h2>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/exercise}" th:object="${param}" method="post">
+
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label">Kezdő dátum</label>
+                            <input type="text" th:field="*{startDate}" id="startDate" class="form-control" placeholder="YYYY-MM-DD" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="endDate" class="form-label">Végdátum</label>
+                            <input type="text" th:field="*{endDate}" id="endDate" class="form-control" placeholder="YYYY-MM-DD" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="currency" class="form-label">Pénznem</label>
+                            <input type="text" th:field="*{currency}" id="currency" class="form-control" placeholder="pl. EUR" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Lekérdezés</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>

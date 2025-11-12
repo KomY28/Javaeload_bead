@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: html_head}">
+    <style>
+        .chart-container {
+            width: 100%; /* Hagyjuk, hogy reszponzív legyen */
+            max-width: 900px;
+            margin: 20px auto; /* Középre igazítás */
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container mt-5">
+    <h1 class="text-center">Historical prices:</h1>
+
+    <div class="chart-container">
+        <canvas id="myPriceChart"></canvas>
+    </div>
+
+    <div class="text-center mt-3">
+        <a th:href="@{'/exercise'}" class="btn btn-secondary">Új lekérdezés</a>
+    </div>
+</div>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    const chartLabels = /*[[${priceLabels}]]*/ [];
+    const chartData = /*[[${priceData}]]*/ [];
+
+    // Megpróbáljuk kiolvasni a MessagePrice objektumot, ha átadtad
+    // Ha nem, akkor 'Currency' lesz a default
+    const currency = /*[[${param != null ? param.currency : 'Currency'}]]*/ 'Currency';
+
+
+    /*]]>*/
+
+    const ctx = document.getElementById('myPriceChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                // A 'currency' változót itt használjuk fel
+                label: `Árfolyam (${currency})`,
+                data: chartData,
+                borderColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderWidth: 2,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Árfolyam alakulása'
+                }
+            }
+        }
+    });
+</script>
+
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>

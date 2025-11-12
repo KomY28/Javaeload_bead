@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: html_head}"></head>
+
+<body>
+
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container mt-5">
+    <h2>Nyitott Forex Pozíciók</h2>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>Trade ID</th>
+                <th>Instrumentum</th>
+                <th>Mennyiség</th>
+                <th>Nyitó Ár</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pos : ${positions}">
+                <td th:text="${pos.tradeId}">1001</td>
+                <td th:text="${pos.instrument}">EUR_USD</td>
+                <td th:text="${pos.quantity}"
+                    th:classappend="${pos.quantity < 0} ? 'text-danger' : 'text-success'">
+                    10000
+                </td>
+                <td th:text="${pos.openPrice}">1.0850</td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(positions)}">
+                <td colspan="4" class="text-center">Nincsenek nyitott pozíciók.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>
