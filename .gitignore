@@ -1,28 +1,8 @@
-
-/target/
-
-
-*.jar
-*.war
-*.ear
-
-
-.idea/
-*.iml
-*.iws
-*.ipr
-out/
-
-
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-
-.DS_Store
-
-# Windows
-Thumbs.db
-replay_pid*
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
