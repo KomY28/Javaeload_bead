@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: html_head}"></head>
+<body>
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Pozíció Zárás (Forex-Zár)</h2>
+
+            <form th:action="@{/forex-close}" th:object="${formRequest}" method="post" class="card card-body mt-4">
+
+                <div class="mb-3">
+                    <label for="tradeId" class="form-label">Trade ID:</label>
+                    <select th:field="*{tradeId}" id="tradeId" class="form-select">
+                        <option value="">Válassz egyet a nyitott pozíciókból...</option>
+                        <option th:each="id : ${openTradeIds}"
+                                th:value="${id}"
+                                th:text="${id}">1001</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-danger">Pozíció zárása</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>
