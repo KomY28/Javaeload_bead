@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: html_head}"></head>
+<body>
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container mt-5">
+    <h2>Historikus Árak (Forex-HistÁr)</h2>
+
+    <form th:action="@{/forex-history}" th:object="${formRequest}" method="post" class="card card-body mt-4">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="instrument" class="form-label">Instrumentum:</label>
+                <select th:field="*{instrument}" id="instrument" class="form-select">
+                    <option value="">Válassz...</option>
+                    <option th:each="inst : ${instruments}" th:value="${inst}" th:text="${inst}">EUR_USD</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="granularity" class="form-label">Granularitás:</label>
+                <select th:field="*{granularity}" id="granularity" class="form-select">
+                    <option value="">Válassz...</option>
+                    <option th:each="g : ${granularities}" th:value="${g}" th:text="${g}">D</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Adatok lekérése</button>
+    </form>
+
+    <div th:if="${historicalPrices != null AND !historicalPrices.isEmpty()}" class="mt-4">
+        <h4>Utolsó 10 gyertya</h4>
+        <table class="table table-sm table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Dátum</th>
+                <th>Open</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Close</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="price : ${historicalPrices}">
+                <td th:text="${price.date}">2025-10-20</td>
+                <td th:text="${price.open}">1.1000</td>
+                <td th:text="${price.high}">1.1100</td>
+                <td th:text="${price.low}">1.0900</td>
+                <td th:text="${price.close}">1.0950</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>

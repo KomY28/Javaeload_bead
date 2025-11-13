@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: html_head}"></head>
+
+<body>
+
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container my-5">
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <h1 class="text-body-emphasis">Üdvözlünk az MNB Árfolyam Kliensben!</h1>
+        <p class="col-lg-8 mx-auto fs-5 text-muted">
+            Ez az alkalmazás a Spring Boot és a SOAP technológiák segítségével
+            lehetővé teszi a Magyar Nemzeti Bank hivatalos árfolyam-adatainak
+            lekérdezését és grafikus megjelenítését.
+        </p>
+        <div class="d-inline-flex gap-2 mb-5">
+            <a th:href="@{/exercise}" class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" role="button">
+                Lekérdezés indítása
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>

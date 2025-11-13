@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: html_head}"></head>
+<body>
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Pozíció Nyitás (Forex-Nyit)</h2>
+
+            <form th:action="@{/forex-open}" th:object="${formRequest}" method="post" class="card card-body mt-4">
+
+                <div class="mb-3">
+                    <label for="instrument" class="form-label">Instrumentum:</label>
+                    <select th:field="*{instrument}" id="instrument" class="form-select">
+                        <option value="">Válassz...</option>
+                        <option th:each="inst : ${instruments}"
+                                th:value="${inst}"
+                                th:text="${inst}">EUR_USD</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Mennyiség:</label>
+                    <input type="number" th:field="*{quantity}" id="quantity" class="form-control" />
+                    <div class="form-text">
+                        Pozitív szám = Vétel (Long), Negatív szám = Eladás (Short)
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Pozíció nyitása</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>

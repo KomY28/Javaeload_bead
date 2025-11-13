@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: html_head}"></head>
+<body>
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<div class="container mt-5">
+    <h2>Számlainformációk (Forex-account)</h2>
+
+    <div th:if="${account != null}" th:object="${account}" class="card mt-4">
+        <div class="card-header">
+            Számla ID: <span th:text="*{accountId}">123456</span>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <strong>Pénznem:</strong> <span th:text="*{currency}">USD</span>
+            </li>
+            <li class="list-group-item">
+                <strong>Egyenleg (Balance):</strong> <span th:text="*{balance}">10000.00</span>
+            </li>
+            <li class="list-group-item">
+                <strong>Nyitott profit/veszteség (P/L):</strong>
+                <span th:text="*{profitLoss}"
+                      th:classappend="*{profitLoss < 0} ? 'text-danger' : 'text-success'">-150.25</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:replace="~{fragments/header :: bootstrap_js}"></div>
+</body>
+</html>
